@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Width e Height</title>
+  <style>
+     .box {
+      height: 100px;
+      border: 3px solid black;
+      background-color: rgb(250, 61, 61);
+      transition: transform .7s linear;
+      margin: 1rem 0;
+      padding: .2rem;
+      color:rgb(54, 12, 12);
+      text-align: center;
+    }
+
+    .mini-box {
+      min-width: 30rem;
+      min-height: 50px;
+      border: 3px solid black;
+      margin: 1rem;
+      padding: .2rem;
+      color:rgb(54, 12, 12);
+      text-align: center;
+      background-color: rgb(250, 231, 61);
+    }
+
+    .box1 {
+      width: 800px; 
+      /*Independente da tela expandir ou diminuir o tamanho continua o mesmo.
+      - Deixa tudo muito estático e cria uma barra de rolagem no navegador.
+      */
+    }
+
+    .box2 {
+      background-color: rgb(49, 30, 47);
+      color: white;
+      max-width: 600px;
+      width: 800px; /*- Se um mesmo elemento tiver também um max-width (700px) mas com o valor menor que o do width (800px). O max-width que será considerado.*/
+    }
+
+    .box3 {
+      background-color: rgb(231, 153, 177);
+      min-width: 800px;
+      width: 700px; /* Se um mesmo elemento tiver também um min-width (800px) com um valor maior que o do width (700px). O min-width que será considerado.*/
+    }
+
+    .box4 {
+      background-color: rgb(250, 61, 225);
+      max-width: 600px; /*Maximo de largura que o elemento pode ter?Ou seja, o elemento vai expandindo junto com a tela até chegar em 600px. Nesse momento ele para de crescer mesmo que a tela continue.*/ 
+      /*CRESCE ATÉ O LIMITE*/
+    }
+
+    .box5{
+      background-color: rgb(61, 250, 140);
+      min-width: 500px /*Mínimo de largura que o elemento pode ter. Ou seja, o elemento vai diminuindo junto com a tela até chegar em 500px. Nesse momento ele para de diminuir mesmo que a tela continue.*/
+      /*DIMINUI ATÉ O LIMITE*/
+    }
+
+    .box6{
+      background-color: rgb(101, 163, 172);
+      max-width: 750px;
+      min-width: 600px
+      /*
+      Expandi até 700px
+      Diminui até 600px 
+      */
+    }
+
+    .box7{
+      max-width: 600px
+    }
+
+  </style>
+</head>
+<body>
+  <div class= container>
+    <div class="box box1">Width: 800px</div>
+    <div class="box box2">max-width: 600px;
+      width: 800px (anulado pelo max)</div>
+    <div class="box box3">min-width: 800px;
+      width: 700px; (anulado pelo min)</div>
+    <div class="box box4">max-width: 600px;</div>
+    <div class="box box5">min-width: 500px</div>
+    <div class="box box6">max-width: 750px;
+      min-width: 600px</div>
+  </div>
+
+  <div class= container>
+    <div class="box box7">
+      <div class="mini-box"
+      </div>
+    </div>
+  </div>
+</body>
+</html>

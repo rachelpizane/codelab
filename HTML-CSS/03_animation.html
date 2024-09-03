@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation</title>
+  <style>
+    /* Keyframes
+    - São como o roteiro de uma animação em CSS.
+    - Ele permite criar sequências de animação, especificando como o elemento deve se comrportar em diferentes estágios
+    - Sintaxe
+      @keyframes nomeDaAnimação {
+        from {
+        [Bloco de codigo de inicio]
+        }
+
+        to {
+        [Bloco de codigo de final]
+        }
+      }
+        * Podemos personalizar mais ainda e criar os estágio por sua porcentagem. Por exemplo, podemos definir animação no estágio 35%
+          > 35% {
+          [Bloco de codigo que ocorrerá quando a sequencia de animação estiverem 35%]
+          }
+       * Se não for especificado o estágio da animação (from/to), o navegador usará o estilo existente do elemento como o estágio que está faltando.
+        > É comum não incluir o estágio inicial, pois normalmente o proprio estilo atual do elemento já seria o estágio inicial que queremos
+    - Para que animação aconteça você deve incluir no elemento as seguintes propriedades: */
+      
+    /* animation-name:
+    - Vincula a animação criada ao elemento
+    - O valor é o nome dado a animação */
+
+    /* animation-duration:
+    - Define quanto tempo a animação deve ocorrer
+    - A medida do tempo é em segundos ou milisegundos.
+    - Obrigatorio ser definido, se não a animação não ocorre, pois o valor padrão é 0s.*/
+
+    /*animation-delay
+      - Define o delay do inicio da animação
+      - Faz com que a animação ocorra em x*/
+
+    /*animation-iterarion-count
+    - Especifica o numero de vezes que a animação deve ser executado
+    - Os valores pode ser um numero ou "infinite"
+      * Pelo visto o Infinite será o mais utilizado
+    */
+
+    /*animation-direction
+    - Define por qual estágio a animação começará
+    - Segue os valores:
+      * normal (padrão) - Começa pelo inicio e vai até o final.A cada ciclo ele reseta a animação e inicia novamente.
+      * reverse - Começa pelo final e vai até o estágio inicial. A cada ciclo ele reseta a animação e inicia pelo fim novamente.
+      * alternate - Começa pelo inicio e vai até o final. No proximo ciclo ele começa do final para o inicio. (Bate e volta)
+      * alternate-reverse - Começa pelo final e vai até o inicio. No proximo ciclo ele começa do inicio para o final. 
+    */
+
+    /*animation-timing-function
+    - Define a velocidade da animação
+    - Segue os valores:
+      * ease (padrão): Começa devagar, depois rapido e no final lento
+      * linear: Mesma velocidade no inicio ao fim
+      * ease-in: Inicio lento
+      * ease-out: Final lento
+      * ease-in-out: Inicio e finais lentos
+    */
+
+    /*animation-fill-mode
+    - Especifica o que deve acontecer com os estilos de um elemento animado antes que animação comece ou depois que ela termine
+    - Essa propriedade não é muit util quando o elemento tem a iteração como Infinite. 
+      * Você só consegue ver seu efeito se utilizar backwards e both, e só no primeiro ciclo.
+    - Segue os valores:
+      * None (padrão) - O elemento retorna a sua estilização inicial depois que termina a animação
+      * fowards - O elemento fica com a estilização do ultimo estágio da animação depois que termina a animação
+      * backwards - O elemento aplica a estlilização do primeiro estágio antes de começar a animação
+        > É possivel ver o efeito quando colocamos um delay
+      * both - Combina os comportamentos de forwards e backwards*/
+
+    .container {
+      margin: 2rem;
+      padding: 1rem;
+      border: 1px solid grey;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .col {
+      border: 1px solid grey;
+      justify-self: center;
+      padding: .75rem 1rem;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      background-color: rgb(253, 253, 109);
+      margin: 2rem 0;
+      padding: .2rem;
+      color: rgb(54, 12, 12);
+      text-align: center;
+
+    }
+
+    .box1 {
+      animation-name: mudarCorFundo;
+      /*Propriedade que chama a animação definida no keyframes*/
+      animation-duration: 7s;
+      /*A animação durará 7 segundos*/
+      animation-iteration-count: 2;
+      /*Animação ocorrerá 2x*/
+    }
+
+    @keyframes mudarCorFundo {
+      to {
+        background-color: red;
+      }
+    }
+
+    .box2 {
+      animation-name: mudarCorFundoMultiplo;
+      animation-duration: 7000ms;
+      animation-delay: 2s
+        /*Animação iniciará após 2 segundos*/
+    }
+
+    /* Temos mais controle sobre a animação quando definindo os estágio pelas porcentagens */
+    @keyframes mudarCorFundoMultiplo {
+      25% {
+        background-color: red
+      }
+
+      50% {
+        background-color: rgb(253, 253, 109)
+      }
+
+      75% {
+        background-color: red
+      }
+
+      100% {
+        background-color: rgb(253, 253, 109)
+      }
+    }
+
+    .box3 {
+      animation-name: rodar;
+      animation-duration: 7s;
+      animation-iteration-count: infinite;
+      /*Animação ocorrerá infinitamente*/
+      animation-timing-function: linear; /*Animação ocorre em velocidade constante*/
+    }
+
+    @keyframes rodar {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .box-direction {
+      animation-name: locomover;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+
+    .box5 {
+      animation-direction: reverse;
+      /*Animação ocorre de trás para frente e por fim reseta e recomeçar a animação*/
+      animation-timing-function: ease-in;
+    }
+
+    .box6 {
+      animation-direction: alternate; /*Animação ocorre do inicio ao fim e depois retorna de trás para frente*/
+      animation-timing-function: linear;
+    }
+
+    @keyframes locomover {
+      to {
+        transform: translate(150px)
+      }
+    }
+
+    .box-fill-mode {
+      animation-name: mudarCorFundoFixo;
+      animation-duration: 4s;
+      animation-timing-function: ease-out;
+    }
+
+    .box7 {
+      animation-fill-mode: forwards; /*O elemento fica com a estilização do ultimo estágio no final da animação*/
+    }
+
+    .box8 {
+      animation-fill-mode: backwards; /*O elemento fica com a estilização do primeiro estágio antes da animação começar*/
+      animation-delay: 3s;
+    }
+
+    .box9 {
+      animation-fill-mode: both; 
+      /* O elemento tem os efeitos do forwards e backwards*/
+      animation-delay: 3s;
+    }
+
+    @keyframes mudarCorFundoFixo {
+      from {
+        background-color: #c0cfff;
+      }
+
+      to {
+        background-color: #261cb8;
+        color: white;
+      }
+    }
+
+    .box10 {
+      animation: rodar 4s linear infinite 
+      /* name | duration | timing-function |  iteration-count direction*/
+    }
+
+    @keyframes rodar {
+      0% {
+        transform: scale(1) rotate(0deg)
+      }
+
+      25% {
+        transform: scale(1.1) rotate(90deg)
+      }
+
+      35% {
+        transform: scale(1) rotate(126deg)
+      }
+
+      45% {
+        transform: scale(1.1) rotate(162deg)
+      }
+
+      50% {
+        transform: scale(1) rotate(180deg)
+      }
+
+      75% {
+        transform: scale(1.1) rotate(270deg)
+      }
+
+      85% {
+        transform: scale(1) rotate(306deg)
+      }
+
+      95% {
+        transform: scale(1.1) rotate(342deg)
+      }
+
+      100% {
+        transform: scale(1) rotate(360deg)
+      }
+    }
+
+    @keyframes expandir {
+      0% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.2)
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="02_transform2d.html" target="_parent"> << Transform </a>
+  <div class="container">
+    <div class="col">
+      <div class="box box1">Box1: Name e duração</div>
+      <div class="box box2">Box2: Delay e procentagem</div>
+      <div class="box box3">Box3: Infinite / Rotate / Linear</div>
+    </div>
+
+    <div class="col">
+      <div class="box box-direction box4">Box4: Normal / Translate (100px) / Ease</div>
+      <div class="box box-direction box5">Box5: Reverse / Translate (100px) / ease-in</div>
+      <div class="box box-direction box6">Box5: Alternate / Translate (100px) / Linear</div>
+    </div>
+
+    <div class="col">
+      <div class="box box-fill-mode box7">Box7: Fill-mode: Backwards</div>
+      <div class="box box-fill-mode box8">Box8: Fill-mode: Forwards</div>
+      <div class="box box-fill-mode box9">Box9: Fill-mode: Both</div>
+    </div>
+
+    <div class="col">
+      <div class="box box10">Box10</div>
+      <div class="box box11">Box11</div>
+      <div class="box box12">Box12</div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

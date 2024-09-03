@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /*Transition
+    -  permite você mudar os valores da propriedade de forma suave, durante um determinado periodo
+    - É uma shorthand das propriedades:
+      * transition-property
+      * transition-duration
+      * transition-timing-function
+      * transition-delay
+      OBS: Sempre especifique a duração, pois ao contrário o valor sera 0s e não a transição não terá efeito.
+    - Sintaxe
+      * Transition: property | duration | timing-function | delay
+      * Valor padrão: all 0s ease 0s;
+    */
+
+    /* 
+    Transition-Property 
+    - Permite especificar qual propriedades CSS que será afetada pela transição.
+    - Principas atributos
+      * all - Todas as propriedades serão afetadas (Valor padrão) 
+      * [nome-da-propriedade] - Qualquer propriedade CSS, podendo ser mais de uma.
+    */
+
+    /* 
+    Transition-duration
+    - Permite especificar a duração do efeito de transição em segundos (s) ou milisecondos(ms)
+    - Propriedade obrigatorio para que a transição tenha efeito
+    - Valor padrão:  - 0s.
+    */
+
+    /* 
+    Transition-timing-function
+    - Permite definir a curva de velocidade do efeito de transição.
+    - Atributos: 
+      * ease (Valor padrão) - A transição começa devagar, depois rapida e por fim devagar - cubic-bezier(0.25, 0.1, 0.25, 1)
+      * linear - A transição tem a mesma velocidade do inicio ao fim -  cubic-bezier(0, 0 , 1, 1)
+      * ease-in - O inicio é devagar e o meio e o fim são constantes - cubic-bezier(0.42,0,1,1))
+      * ease-out - O início e o meio são constantes e o final é devagar - cubic-bezier(0,0,0.58,1))
+      *ease-in-out: O inicio e o fim são devagar e o meio é constante - cubic-bezier(0.42,0,0.58,1)
+
+      OBS: Existe uma diferença, principalmente o ease e linear, mas o restante é bem pouca. Também é possivel definir pelo proprio cubic-bezier, mas achei complexo kkk
+    */
+
+    /* 
+    Transition-delay
+    - Permite incluir um delay antes do efeito de transição começar de segundos (s) e milisegundos(ds)
+    - Valor padrão: 0s;
+    */
+
+    .container {
+      margin: 2rem;
+      padding: 2rem;
+      border: 1px solid grey;
+      display: grid;
+    }
+
+    .col {
+      border: 1px solid grey;
+      justify-self: center;
+      padding: .75rem 1rem;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      background-color: rgb(253, 253, 109);
+      margin: 1rem 0;
+      padding: .2rem;
+      color: rgb(54, 12, 12);
+      text-align: center;
+    }
+
+    .box1 {
+      transition: width 2s;
+      /*Se em algum momento a largura mudar, a transição será suave e durará 2 segundos.*/
+      /* 
+      Versão detalhada:
+        transition-property: width;
+        transition-duration: 2s; 
+      */
+
+    }
+
+    .box1:hover,
+    .box3:hover,
+    .box4:hover,
+    .box5:hover,
+    .box6:hover,
+    .box7:hover {
+      width: 400px;
+    }
+
+    .box2 {
+      /* transition: width 2s, height 4s; */
+      /*Podemos transicionar mais de um valor ao mesmo tempo*/
+      transition-property: width, height;
+      transition-duration: 2s, 4s;
+    }
+
+    .box2:hover {
+      width: 200px;
+      height: 200px;
+    }
+
+    .box3 {
+      transition: width 2s linear
+    }
+
+    .box4 {
+      transition: width 2s ease-in
+    }
+
+    .box5 {
+      transition: width 2s ease-out
+    }
+
+    .box6 {
+      transition: width 2s ease-in-out
+    }
+
+    .box7 {
+      transition: width 2s linear 2s
+        /* 
+      Versão detalhada:
+      transtion-property: width
+      transition-duration: 2s
+      transition-timing-function: linear
+      transition-delay: 2s 
+      */
+    }
+
+    .box8 {
+      background-color: aquamarine;
+      transition: opacity 1s ease-in;
+    }
+
+    .box8:hover {
+      opacity: 0;
+    }
+
+    .box9 {
+      transition: background-color 2s linear, color 4s ease-out
+    }
+
+    .box9:hover {
+      background-color: black;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="02_transform2d.html" target="_parent">Transform 2D >> </a>
+
+  <div class="container">
+    <div class="box box1">Box 1: ease</div>
+    <div class="box box2">Box 2: ease</div>
+    <div class="box box3">Box 3: linear</div>
+
+    <div class="box box4">Box 4: ease-in</div>
+    <div class="box box5">Box 5:ease-out</div>
+    <div class="box box6">Box 6: ease-in-out</div>
+
+    <div class="box box7">Box 7: delay</div>
+    <div class="box box7">Box 7: delay</div>
+    <div class="box box8">Box 8</div>
+
+    <div class="box box9">Box 9</div>
+
+</body>
+
+</html>

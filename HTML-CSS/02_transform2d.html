@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /*
+    Transform
+    - Propriedade que aplica transformações 2d e 3d no elemento 
+    - Permite que o elemento gire, incline, dimensione ou mova
+    - Muito utilizado com transition e animações CSS
+    - Sintaxe: Transform-functions
+    - Dica: 
+      * Eixo-X / X-axis => Horizontal 
+      * Eixo-Y / Y-axus -> Vertical
+
+    - Atributos para transformações em 2D:
+      * Translate(x,y) - Move o objeto da sua posição atual, de acordo com os parametros dados para eixo-x e eixo-y.
+        > TranslateX(x) = Move o objeto de acordo com o eixo-X definido
+        > TranslateY(y) = Move o objeto de acordo com o eixo-Y definido
+        > OBS:Provavelmente é o que eu mais usarei.
+
+      * Rotate() - Rotaciona de acordo com o grau do parametro. (Valor positivo: Direção horaria. Valor negativo - Direção anti-horaria)
+        > Possui outras variações, mas nao as verei por agora
+        (RotateX, RotateY, RotateZ)
+
+      * Scale(x,y) - Aumenta ou diminui o tamanho da altura e largura do elemento, de acordo com os parametros inseridos para o eixo-x e eixo-y
+        > Se for dado apenas um valor, ele será utilizado tanto para largura quanto para a altura. 
+        > O valor é do tipo 1 * porcentagem desejada:
+          Ex: 1.2 - Aumenta em 20%
+              0.9 - Diminui em 10%;
+        > ScaleX(x) = Aumenta/Diminui a largura do elemento de acordo com o eixo-X definido
+        > ScaleY(y) = Aumenta/Diminui a altura do elemento de acordo com o eixo-Y definido
+
+      * Skew(xdeg, ydeg) - Inclina o elemento ao longo dos eixos x e y de acordo com angulos fornecidos
+        > OBS: É simples, o objeto inclina, só não entendi muito o funcionamento do inclinamento, esse eu meio que iria testando até aparecer o que eu quero.
+        > SkewX(xdeg) - Inclina o elemento apenas ao longo do exio-X
+        > SkewY(Ydeg) - Inclina o elemento apenas ao longo do exio-Y
+
+      * Matrix() - Combina todos os métodos anteriores em um só.
+        > Possui 6 parametros que permitem rotacionar, escalonar, inclinar e mover o elemento
+        > Sintaxe: matrix(scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY())
+     */
+    .container {
+      margin: 2rem;
+      padding: 2rem;
+      border: 1px solid grey;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .col {
+      border: 1px solid grey;
+      justify-self: center;
+      padding: .75rem 1rem;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      background-color: rgb(250, 61, 61);
+      transition: transform .7s linear;
+      margin: 1rem 0;
+      padding: .2rem;
+      color:rgb(54, 12, 12);
+      text-align: center;
+    }
+
+    .box1:hover {
+      transform: translate(16px, 8px); /*Move o elemento 16px para direita e 8px para baixo*/
+    }
+
+    .box2:hover {
+      transform: translateX(-20px); /*Move o elemento 20px para esquerda*/
+    }
+    
+    .box3:hover {
+      transform: translateY(-10px); /*Move o elemento 10px para cima*/
+    }
+
+    .box4:hover {
+      transform: rotate(90deg) /*Gira para direção horaria*/
+    }
+
+    .box5:hover {
+      transform: rotate(-90deg) /*Gira para direção anti-horaria*/
+    }
+
+    .box6:hover {
+      transform: scale(1.5, 1.2) /*Aumenta 50% a largura e 20% a altura*/
+    }
+
+    .box7:hover {
+      transform: scale(0.8) /*Diminui 20% tanto na largura quando a altura*/
+    }
+
+    .box8:hover {
+      transform: scaleX(1.5) /* Aumenta 50% apenas a largura*/
+    }
+
+    .box9:hover {
+      transform: scaleY(0.6) /* Diminui 40% apenas a altura*/
+    }
+
+    .box10:hover {
+      transform: skewX(10deg) /*Sua largura inclina 10 graus para esquerda*/
+    }
+
+    .box11:hover {
+      transform: skewY(-10deg) /*Sua altura inclina 10 graus para cima*/
+    }
+
+    .box12:hover {
+      transform: skew(20deg,-10deg) /*Sua largura inclina 20 graus para esquerda e sua altura 10 grau para cima*/
+    }
+
+    .box-s {
+      font-size: .85rem;
+    }
+    .box13:hover {
+      transform: matrix(1.2, 0.5, 0, .7, 80, -20) 
+      /*(1.2) Aumenta 20% a largura,
+      (.5) Inclina 50% a altura de acordo com o eixo y
+      (0) Inclina 0% a largura de acordo com o eixo X
+      (.7) Diminui 30% a altura,
+      (80) move 80px para esquerda e
+      (-20) move 20px para cima
+      */ 
+    }
+
+    .box14:hover {
+      transform: translateX(-100%); /*Move para esquerda 100% da largura atual. No nosso exemplo o elemento tem 100px de largura, logo ele moverá 100px para esquerda.*/
+    }
+    .box15:hover {
+      transform: translateY(100%); /*Move para baixo 100% da altura atual. No nosso exemplo o elemento tem 100px de altura, logo ele moverá 100px para baixo.*/
+    }
+
+  </style>
+</head>
+<body>
+  <a href="01_transition.html" target="_parent"> << Transition</a>
+  <a href="03_animation.html" target="_parent"> Animation >> </a>
+  
+  <div class="container">
+    <div class="col">
+      <div class="box box1">Box 1: Translate(x,y)</div>
+      <div class="box box2">Box 2: TranslateX(x)</div>
+      <div class="box box3">Box 3: TranslateY(y)</div>
+    </div>
+    <div class="col">
+      <div class="box box4">Box 4: rotate(+angle)</div>
+      <div class="box box5">Box 5: rotate(-angle)</div>
+      <div class="box box6">Box 6: scale(width, height)</div>
+    </div>
+    <div class="col">
+      <div class="box box7">Box 7:scale(width, height) 2v</div>
+      <div class="box box8">Box 8: scaleX</div>
+      <div class="box box9">Box 9: scaleY</div>
+    </div>
+
+    <div class="col">
+      <div class="box box10">Box 10: skewX(xdeg)</div>
+      <div class="box box11">Box 11 skewY(ydeg)</div>
+      <div class="box box12">Box 12 skew(xdeg, ydeg)</div>
+    </div>
+
+    <div class="col">
+      <div class="box box-s box13">Box 13: matrix(scaleX, skewY, skewX, scaleY, translateX, translateY)</div>
+      <div class="box box14">Box 14: translateX (-100%) </div>
+      <div class="box box15">Box 15: TranslateY (100%) </div>
+    </div>
+  </div>
+  
+</body>
+</html>
